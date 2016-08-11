@@ -1,0 +1,126 @@
+{% extends "SITPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Annonces - {{ parent() }}
+{% endblock %}
+{% block sitplatform_left %}
+    <div class="demo-card-square mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title mdl-card--expand">
+            <h2 class="mdl-card__title-text">List des Contacts</h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+            <ul class="demo-list-item mdl-list">
+                {% for item in listpersonnel %}
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                      {{ item.nom }} {{ item.prenom }}
+                    </span>
+                    <span class="mdl-list__item-secondary-content">
+                            <div style="display: flex">
+                                <a class="mdl-list__item-secondary-action" href="{{ path('sit_personnel',{'id':societe.id,'idpersonnel':item.id}) }}">
+                                    <i class="material-icons">visibility</i>
+                                </a>
+                            </div>
+                        </span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="mdl-card__actions mdl-card--border">
+            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{ path('sit_ajouter_personnel',{'id':societe.id}) }}">
+                Ajouter Contact
+            </a>
+        </div>
+    </div>
+{% endblock %}
+    {% block sitplatform_center %}
+
+        <div class="demo-card-square mdl-card mdl-shadow--2dp">
+            <div class="mdl-card__title mdl-card--expand">
+                <h2 class="mdl-card__title-text">Societe Num : {{ societe.id }}</h2>
+            </div>
+            <div class="mdl-card__supporting-text">
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--3-col">
+                            <strong>Nom : </strong> {{ societe.nom }}
+                    </div>
+                    <div class="mdl-cell mdl-cell--3-col"><strong>Tel : </strong> {{ societe.tel }}</div>
+                    <div class="mdl-cell mdl-cell--3-col"><strong>Fax : </strong> {{ societe.fax }}</div>
+                    <div class="mdl-cell mdl-cell--3-col"><strong>Adresse : </strong> {{ societe.adresse }}</div>
+                </div>
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <div><strong>Apporter par le Commerical : </strong> {{ societe.nom }}</div><br><br>
+                        <div><strong>Demo : </strong> fermer</div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <strong>Gérer par le commercial : </strong> {{ societe.tel }}</div>
+                </div>
+
+                <h6><strong>Liste des Notes:</strong></h6>
+                <ul class="demo-list-three mdl-list">
+                    {% for item in listNote %}
+                    <li class="mdl-list__item mdl-list__item--three-line">
+                            <span class="mdl-list__item-primary-content">
+                              <i class="material-icons mdl-list__item-avatar">person</i>
+                              <span>Bryan Cranston</span>
+                                <span class="mdl-list__item-sub-title">{{ item.date|date('Y-m-d H:i:s')  }}</span>
+                              <span class="mdl-list__item-text-body">
+                                  {{ item.description }}
+                              </span>
+
+                            </span>
+                        <span class="mdl-list__item-secondary-content">
+                            <br>
+                            <div style="display: flex">
+                                <a class="mdl-list__item-secondary-action" href="#">
+                                    <i class="material-icons">edit</i>
+                                </a>
+                                <a class="mdl-list__item-secondary-action" href="#">
+                                    <i class="material-icons">delete</i>
+                                </a>
+                            </div>
+                        </span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Ajouter Note
+                </a>
+            </div>
+        </div>
+    {% endblock %}
+{% block sitplatform_right %}
+<div class="demo-card-square mdl-card mdl-shadow--2dp">
+    <div class="mdl-card__title mdl-card--expand">
+        <h2 class="mdl-card__title-text">List des Produits</h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+        <ul class="demo-list-item mdl-list">
+            {% for item in listproduit  %}
+            <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                      {{ item.libelle }}
+                    </span>
+                <span class="mdl-list__item-secondary-content">
+                            <div style="display: flex">
+                                <a class="mdl-list__item-secondary-action" href="{{ path('sit_produit',{'id':societe.id,'idproduit':item.id}) }}">
+                                    <i class="material-icons">visibility</i>
+                                </a>
+                            </div>
+                        </span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="mdl-card__actions mdl-card--border">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{ path('sit_ajouter_produit',{'id':societe.id}) }}">
+            Ajouter Produits
+        </a>
+    </div>
+</div>
+{% endblock %}

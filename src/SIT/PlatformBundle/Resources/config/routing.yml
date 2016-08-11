@@ -1,0 +1,63 @@
+sit_platform_homepage:
+    path:     /
+    defaults: { _controller: SITPlatformBundle:main:index }
+sit_societe:
+    path:     /{id}
+    defaults:
+        _controller: SITPlatformBundle:main:view
+    requirements:
+        id: \d+
+sit_personnel:
+    path:     /{id}/personnel/{idpersonnel}
+    defaults:
+        _controller: SITPlatformBundle:main:afficherPersonnel
+    requirements:
+        id: \d+
+        idpersonnel: \d+
+sit_produit:
+    path:     /{id}/produit/{idproduit}
+    defaults:
+        _controller: SITPlatformBundle:main:afficherProduit
+    requirements:
+        id: \d+
+        idproduit: \d+
+sit_ajouter_personnel:
+    path:     /{id}/ajoutercontact/
+    defaults:
+        _controller: SITPlatformBundle:main:addPersonnel
+    requirements:
+        id: \d+
+sit_ajouter_produit:
+    path:     /{id}/ajouterproduit/
+    defaults:
+        _controller: SITPlatformBundle:main:ajouterProduit
+    requirements:
+        id: \d+
+sit_modifier_personnel:
+    path:     /{id}/modifiercontact/{idpersonnel}
+    defaults:
+        _controller: SITPlatformBundle:main:editPersonnel
+    requirements:
+        id: \d+
+        idpersonnel: \d+
+sit_modifier_produit:
+    path:     /{id}/modifierproduit/{idproduit}
+    defaults:
+        _controller: SITPlatformBundle:main:modifierProduit
+    requirements:
+        id: \d+
+        idproduit: \d+
+sit_supprimer_personnel:
+    path:     /{id}/supprimercontact/{idpersonnel}
+    defaults:
+        _controller: SITPlatformBundle:main:deletePersonnel
+    requirements:
+        id: \d+
+        idpersonnel: \d+
+sit_supprimer_produit:
+    path:     /{id}/supprimerproduit/{idproduit}
+    defaults:
+        _controller: SITPlatformBundle:main:supprimerProduit
+    requirements:
+        id: \d+
+        idproduit: \d+

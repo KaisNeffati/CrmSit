@@ -1,0 +1,30 @@
+{% extends "SITPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Annonces - {{ parent() }}
+{% endblock %}
+
+    {% block sitplatform_center %}
+
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+            <tr>
+                <th class="mdl-data-table__cell--non-numeric">Nom</th>
+                <th>Tel</th>
+                <th>Fax</th>
+                <th>Adresse</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in listSociete %}
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{ item.nom }}</td>
+                <td>{{ item.tel }}</td>
+                <td>{{ item.fax }}</td>
+                <td>{{ item.adresse }}</td>
+                <td><a href="{{ path('sit_societe', {'id': item.id}) }}">Gérer</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endblock %}
