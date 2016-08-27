@@ -13,7 +13,7 @@ use SIT\UserBundle\Form\RegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class utilisateurController extends Controller
+class UtilisateurController extends Controller
 {
     public function utilisateursAction(){
         $listUtilisateurs=$this->getDoctrine()->getManager()->getRepository('SITUserBundle:User')->findAll();

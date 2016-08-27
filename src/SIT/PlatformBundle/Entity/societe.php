@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="societe")
  * @ORM\Entity(repositoryClass="SIT\PlatformBundle\Repository\societeRepository")
  */
-class societe
+class Societe
 {
     /**
      * @var int
@@ -64,21 +64,21 @@ class societe
     /**
      * Bidirectional - One-To-Many (INVERSE SIDE)
      *
-     * @ORM\OneToMany(targetEntity="SIT\PlatformBundle\Entity\produit", mappedBy="societe",cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="SIT\PlatformBundle\Entity\Produit", mappedBy="societe",cascade={"persist", "remove"})
      */
     private $societeproduits;
 
     /**
      * Bidirectional - One-To-Many (INVERSE SIDE)
      *
-     * @ORM\OneToMany(targetEntity="SIT\PlatformBundle\Entity\personnel", mappedBy="societe",cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="SIT\PlatformBundle\Entity\Personnel", mappedBy="societe",cascade={"persist", "remove"})
      */
     private $societepersonnel;
 
     /**
      * Bidirectional - One-To-Many (INVERSE SIDE)
      *
-     * @ORM\OneToMany(targetEntity="SIT\PlatformBundle\Entity\note", mappedBy="societe",cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="SIT\PlatformBundle\Entity\Note", mappedBy="societe",cascade={"persist", "remove"})
      */
     private $societenotes;
 

@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="demo")
  * @ORM\Entity(repositoryClass="SIT\PlatformBundle\Repository\demoRepository")
  */
-class demo
+class Demo
 {
     /**
      * @var int
@@ -22,7 +22,7 @@ class demo
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="SIT\PlatformBundle\Entity\societe" ,mappedBy="topic",cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="SIT\PlatformBundle\Entity\Societe" ,mappedBy="topic",cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $societe;

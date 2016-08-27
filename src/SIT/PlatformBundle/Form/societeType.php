@@ -7,7 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class societeType extends AbstractType
+class SocieteType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder

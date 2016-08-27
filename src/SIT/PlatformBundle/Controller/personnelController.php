@@ -9,19 +9,19 @@
 namespace SIT\PlatformBundle\Controller;
 
 
-use SIT\PlatformBundle\Form\personnelType;
+use SIT\PlatformBundle\Form\PersonnelType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use SIT\PlatformBundle\Entity\personnel;
+use SIT\PlatformBundle\Entity\Personnel;
 
-class personnelController extends Controller
+class PersonnelController extends Controller
 {
 
     public function addPersonnelAction(Request $request,$id){
-        $personnel=new personnel();
-        $societe=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:societe')->find($id);
+        $personnel=new Personnel();
+        $societe=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:Societe')->find($id);
         $personnel->setSociete($societe);
-        $form = $this->createForm(personnelType::class, $personnel);
+        $form = $this->createForm(PersonnelType::class, $personnel);
         $form->handleRequest($request);
         if($form->isSubmitted()&&$form->isValid()){
             $task=$form->getData();
@@ -35,8 +35,8 @@ class personnelController extends Controller
     }
 
     public function editPersonnelAction(Request $request,$id,$idpersonnel){
-        $personnel=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:personnel')->find($idpersonnel);
-        $form = $this->createForm(personnelType::class, $personnel);
+        $personnel=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:Personnel')->find($idpersonnel);
+        $form = $this->createForm(PersonnelType::class, $personnel);
         $form->get('nom')->setData($personnel->getNom());
         $form->get('prenom')->setData($personnel->getPrenom());
         $form->get('fonction')->setData($personnel->getFonction());
@@ -47,7 +47,7 @@ class personnelController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted()&&$form->isValid()){
             $em=$this->getDoctrine()->getManager();
-            $em->getRepository('SITPlatformBundle:personnel')->find($idpersonnel);
+            $em->getRepository('SITPlatformBundle:Personnel')->find($idpersonnel);
             $em->flush();
             return $this->redirectToRoute('sit_societe',array('id'=>$id));
         }
@@ -57,7 +57,7 @@ class personnelController extends Controller
 
     }
     public function deletePersonnelAction($id,$idpersonnel){
-        $personnel=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:personnel')->find($idpersonnel);
+        $personnel=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:Personnel')->find($idpersonnel);
         $em=$this->getDoctrine()->getManager();
         $em->remove($personnel);
         $em->flush();
@@ -65,7 +65,7 @@ class personnelController extends Controller
     }
 
     public function afficherPersonnelAction($id,$idpersonnel){
-        $personnel=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:personnel')->find($idpersonnel);
+        $personnel=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:Personnel')->find($idpersonnel);
         return $this->render('SITPlatformBundle:personnel:afficherpersonnel.html.twig',array('personnel' => $personnel,'id'=>$id));
     }
 

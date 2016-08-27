@@ -9,21 +9,21 @@
 namespace SIT\PlatformBundle\Controller;
 
 
-use SIT\PlatformBundle\Entity\societe;
-use SIT\PlatformBundle\Form\societeType;
+use SIT\PlatformBundle\Entity\Societe;
+use SIT\PlatformBundle\Form\SocieteType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 
-class societeController extends Controller
+class SocieteController extends Controller
 {
     public function ajouterSocieteAction(Request $request){
-        $societe=new societe();
+        $societe=new Societe();
         $user=$this->getUser();
         $societe->setCommercialApportant($user);
         $societe->setCommercialGerant($user);
-        $form = $this->createForm(societeType::class, $societe);
+        $form = $this->createForm(SocieteType::class, $societe);
         $form->handleRequest($request);
         if($form->isSubmitted()&&$form->isValid()){
             $task=$form->getData();
@@ -37,8 +37,8 @@ class societeController extends Controller
     }
 
     public function modifierSocieteAction(Request $request,$id){
-        $societe=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:societe')->find($id);
-        $form = $this->createForm(societeType::class, $societe);
+        $societe=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:Societe')->find($id);
+        $form = $this->createForm(SocieteType::class, $societe);
         $form->get('nom')->setData($societe->getNom());
         $form->get('tel')->setData($societe->getTel());
         $form->get('fax')->setData($societe->getFax());
@@ -57,7 +57,7 @@ class societeController extends Controller
     }
 
     public function supprimerSocieteAction($id){
-        $societe=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:societe')->find($id);
+        $societe=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:Societe')->find($id);
         $em=$this->getDoctrine()->getManager();
         $em->remove($societe);
         $em->flush();
@@ -78,7 +78,7 @@ class societeController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted()&&$form->isValid()){
             $em=$this->getDoctrine()->getManager();
-            $em->getRepository('SITPlatformBundle:societe')->find($id);
+            $em->getRepository('SITPlatformBundle:Societe')->find($id);
             $em->flush();
             return $this->redirectToRoute('sit_societe',array('id'=>$id));
         }
@@ -87,11 +87,11 @@ class societeController extends Controller
     }
 
     public function afficherSocieteAction($id){
-        $societe=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:societe')->find($id);
-        $listeNote=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:note')->findBy(array('societe' => $societe));
+        $societe=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:Societe')->find($id);
+        $listeNote=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:Note')->findBy(array('societe' => $societe));
         $listpersonnel=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:personnel')->findBy(array('societe' => $societe));
-        $listproduit =$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:produit')->findBySociete($societe);
-        $demo=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:demo')->findall();
+        $listproduit =$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:Produit')->findBySociete($societe);
+        $demo=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:Demo')->findall();
         $i=0;
         if(sizeof($demo)>0){
             $i=1;

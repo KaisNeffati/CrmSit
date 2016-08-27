@@ -9,20 +9,20 @@
 namespace SIT\PlatformBundle\Controller;
 
 
-use SIT\PlatformBundle\Entity\note;
-use SIT\PlatformBundle\Form\noteType;
+use SIT\PlatformBundle\Entity\Note;
+use SIT\PlatformBundle\Form\NoteType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class noteController extends Controller
+class NoteController extends Controller
 {
     public function ajouterNoteAction(Request $request,$id){
-        $note=new note();
-        $societe=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:societe')->find($id);
+        $note=new Note();
+        $societe=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:Societe')->find($id);
         $note->setSociete($societe);
         $note->setNoteafaire(0);
         $note->setPostDate(new \DateTime);
-        $form = $this->createForm(noteType::class, $note);
+        $form = $this->createForm(NoteType::class, $note);
         $form->handleRequest($request);
         if($form->isSubmitted()&&$form->isValid()){
             $task=$form->getData();
@@ -35,13 +35,13 @@ class noteController extends Controller
             'form' => $form->createView(),'name'=>$societe->getNom(),'id'=>$societe->getId()));
     }
     public function ajouterNoteAFaireAction(Request $request,$id){
-        $note=new note();
+        $note=new Note();
         $datenow=new \DateTime;
-        $societe=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:societe')->find($id);
+        $societe=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:Societe')->find($id);
         $note->setSociete($societe);
         $note->setNoteafaire(1);
         $note->setPostDate($datenow);
-        $form = $this->createForm(noteType::class, $note);
+        $form = $this->createForm(NoteType::class, $note);
         $form->handleRequest($request);
         if($form->isSubmitted()&&$form->isValid()){
             $task=$form->getData();
@@ -54,14 +54,14 @@ class noteController extends Controller
             'form' => $form->createView(),'name'=>$societe->getNom(),'id'=>$societe->getId()));
     }
     public function modifierNoteAction(Request $request,$id,$idnote){
-        $note=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:note')->find($idnote);
-        $form = $this->createForm(noteType::class, $note);
+        $note=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:Note')->find($idnote);
+        $form = $this->createForm(NoteType::class, $note);
         $form->get('date')->setData($note->getDate());
         $form->get('description')->setData($note->getDescription());
         $form->handleRequest($request);
         if($form->isSubmitted()&&$form->isValid()){
             $em=$this->getDoctrine()->getManager();
-            $em->getRepository('SITPlatformBundle:produit')->find($idnote);
+            $em->getRepository('SITPlatformBundle:Produit')->find($idnote);
             $em->flush();
             return $this->redirectToRoute('sit_societe',array('id'=>$id));
         }
@@ -69,7 +69,7 @@ class noteController extends Controller
             'form' => $form->createView(),'name'=>$note->getSociete()->getNom(),'id'=>$note->getSociete()->getId()));
     }
     public function supprimerNoteAction($id,$idnote){
-        $note=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:note')->find($idnote);
+        $note=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:Note')->find($idnote);
         $em=$this->getDoctrine()->getManager();
         $em->remove($note);
         $em->flush();

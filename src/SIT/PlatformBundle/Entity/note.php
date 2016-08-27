@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="note")
  * @ORM\Entity(repositoryClass="SIT\PlatformBundle\Repository\noteRepository")
  */
-class note
+class Note
 {
     /**
      * @var int
@@ -24,7 +24,7 @@ class note
     /**
      * Bidirectional - Many Comments are authored by one user (OWNING SIDE)
      *
-     * @ORM\ManyToOne(targetEntity="SIT\PlatformBundle\Entity\societe",inversedBy="societenotes")
+     * @ORM\ManyToOne(targetEntity="SIT\PlatformBundle\Entity\Societe",inversedBy="societenotes")
      */
     private $societe;
 

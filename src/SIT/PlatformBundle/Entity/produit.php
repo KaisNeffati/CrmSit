@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="produit")
  * @ORM\Entity(repositoryClass="SIT\PlatformBundle\Repository\produitRepository")
  */
-class produit
+class Produit
 {
     /**
      * @var int
@@ -24,14 +24,14 @@ class produit
     /**
      * Bidirectional - Many Comments are authored by one user (OWNING SIDE)
      *
-     * @ORM\ManyToOne(targetEntity="SIT\PlatformBundle\Entity\societe",inversedBy="societeproduits")
+     * @ORM\ManyToOne(targetEntity="SIT\PlatformBundle\Entity\Societe",inversedBy="societeproduits")
      */
     private $societe;
 
     /**
      * Bidirectional - One-To-Many (INVERSE SIDE)
      *
-     * @ORM\OneToMany(targetEntity="SIT\PlatformBundle\Entity\etatProduit", mappedBy="produit",cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="SIT\PlatformBundle\Entity\EtatProduit", mappedBy="produit",cascade={"persist", "remove"})
      */
     private $etatproduits;
 

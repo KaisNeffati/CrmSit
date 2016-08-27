@@ -8,7 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class demoType extends AbstractType
+class DemoType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder

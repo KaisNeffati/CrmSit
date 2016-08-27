@@ -9,21 +9,21 @@
 namespace SIT\PlatformBundle\Controller;
 
 
-use SIT\PlatformBundle\Entity\etatProduit;
+use SIT\PlatformBundle\Entity\EtatProduit;
 use SIT\PlatformBundle\Form\etatProduitType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class etatProduitController extends Controller
+class EtatProduitController extends Controller
 {
 
     public function ajouterEtatProduitAction(Request $request,$id,$idproduit){
-        $etatProduit=new etatProduit();
-        $societe=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:societe')->find($id);
-        $produit=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:produit')->find($idproduit);
+        $etatProduit=new EtatProduit();
+        $societe=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:Societe')->find($id);
+        $produit=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:Produit')->find($idproduit);
         $etatProduit->setCommercial($societe->getCommercialGerant());
         $etatProduit->setProduit($produit);
-        $form = $this->createForm(etatProduitType::class, $etatProduit);
+        $form = $this->createForm(EtatProduitType::class, $etatProduit);
         $form->handleRequest($request);
         if($form->isSubmitted()&&$form->isValid()){
                 $task=$form->getData();
@@ -37,14 +37,14 @@ class etatProduitController extends Controller
     }
 
     public function modifierEtatProduitAction(Request $request,$id,$idproduit,$idetatproduit){
-        $etatproduit=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:etatProduit')->find($idetatproduit);
-        $form = $this->createForm(etatProduitType::class, $etatproduit);
+        $etatproduit=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:EtatProduit')->find($idetatproduit);
+        $form = $this->createForm(EtatProduitType::class, $etatproduit);
         $form->get('status')->setData($etatproduit->getStatus());
         $form->get('budget')->setData($etatproduit->getBudget());
         $form->handleRequest($request);
         if($form->isSubmitted()&&$form->isValid()){
             $em=$this->getDoctrine()->getManager();
-            $em->getRepository('SITPlatformBundle:etatProduit')->find($idetatproduit);
+            $em->getRepository('SITPlatformBundle:EtatProduit')->find($idetatproduit);
             $em->flush();
             return $this->redirectToRoute('sit_produit',array('id'=>$id,'idproduit'=>$idproduit));
         }
@@ -55,7 +55,7 @@ class etatProduitController extends Controller
     }
 
     public function supprimerEtatProduitAction($id,$idproduit,$idetatproduit){
-        $etatProduit=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:etatProduit')->find($idetatproduit);
+        $etatProduit=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:EtatProduit')->find($idetatproduit);
         $em=$this->getDoctrine()->getManager();
         $em->remove($etatProduit);
         $em->flush();

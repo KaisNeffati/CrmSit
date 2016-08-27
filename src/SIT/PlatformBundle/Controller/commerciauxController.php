@@ -11,7 +11,7 @@ namespace SIT\PlatformBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class commerciauxController extends Controller
+class CommerciauxController extends Controller
 {
 
     public function afficherCommerciauxAction(){
@@ -21,7 +21,7 @@ class commerciauxController extends Controller
     public function rapportCommercialAction($idcommercial){
         $commercial=$this->getDoctrine()->getManager()->getRepository('SITUserBundle:User')->find($idcommercial);
         $repository = $this->getDoctrine()
-            ->getRepository('SITPlatformBundle:etatProduit');
+            ->getRepository('SITPlatformBundle:EtatProduit');
         $query = $repository->createQueryBuilder('p')
             ->where('p.commercial = :commercial')
             ->setParameter('commercial', $commercial)

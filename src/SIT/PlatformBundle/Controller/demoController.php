@@ -9,18 +9,18 @@
 namespace SIT\PlatformBundle\Controller;
 
 
-use SIT\PlatformBundle\Entity\demo;
-use SIT\PlatformBundle\Form\demoType;
+use SIT\PlatformBundle\Entity\Demo;
+use SIT\PlatformBundle\Form\DemoType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class demoController extends Controller
+class DemoController extends Controller
 {
     public function ajouterDemoAction(Request $request,$id){
-        $demo=new demo();
-        $societe=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:societe')->find($id);
+        $demo=new Demo();
+        $societe=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:Societe')->find($id);
         $demo->setSociete($societe);
-        $form = $this->createForm(demoType::class, $demo);
+        $form = $this->createForm(DemoType::class, $demo);
         $form->handleRequest($request);
         if($form->isSubmitted()&&$form->isValid()){
             $task=$form->getData();

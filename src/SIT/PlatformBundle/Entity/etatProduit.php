@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="etat_produit")
  * @ORM\Entity(repositoryClass="SIT\PlatformBundle\Repository\etatProduitRepository")
  */
-class etatProduit
+class EtatProduit
 {
     /**
      * @var int
@@ -37,7 +37,7 @@ class etatProduit
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="SIT\PlatformBundle\Entity\produit",inversedBy="etatproduits")
+     * @ORM\ManyToOne(targetEntity="SIT\PlatformBundle\Entity\Produit",inversedBy="etatproduits")
      */
     private $produit;
 
