@@ -1,8 +1,8 @@
 {
     "name": "kais_neffati/crm-sit",
-    "license": "proprietary",
-    "description ": "Gestion commercial",
+    "license": "proprietary", 
     "type": "project",
+    "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
         "psr-4": {
             "": "src/"
