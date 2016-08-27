@@ -36,10 +36,11 @@ class noteController extends Controller
     }
     public function ajouterNoteAFaireAction(Request $request,$id){
         $note=new note();
+        $datenow=new \DateTime;
         $societe=$this->getDoctrine()->getManager()->getRepository('SITPlatformBundle:societe')->find($id);
         $note->setSociete($societe);
         $note->setNoteafaire(1);
-        $note->setPostDate(new \DateTime);
+        $note->setPostDate($datenow);
         $form = $this->createForm(noteType::class, $note);
         $form->handleRequest($request);
         if($form->isSubmitted()&&$form->isValid()){
