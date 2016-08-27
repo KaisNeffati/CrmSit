@@ -5,7 +5,7 @@
     "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
         "psr-4": {
-            "": "src/"
+            "SIT\\PlatformBundle\\": "src/SIT/PlatformBundle"
         },
         "classmap": [
             "app/AppKernel.php",
