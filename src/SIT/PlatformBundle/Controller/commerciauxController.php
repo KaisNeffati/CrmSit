@@ -9,10 +9,7 @@
 namespace SIT\PlatformBundle\Controller;
 
 
-use SIT\PlatformBundle\Entity\produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\HttpFoundation\Request;
 
 class commerciauxController extends Controller
 {

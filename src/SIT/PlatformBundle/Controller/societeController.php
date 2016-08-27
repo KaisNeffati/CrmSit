@@ -11,10 +11,8 @@ namespace SIT\PlatformBundle\Controller;
 
 use SIT\PlatformBundle\Entity\societe;
 use SIT\PlatformBundle\Form\societeType;
-use SIT\UserBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 
