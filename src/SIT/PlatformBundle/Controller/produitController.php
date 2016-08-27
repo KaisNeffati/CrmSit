@@ -9,8 +9,6 @@
 namespace SIT\PlatformBundle\Controller;
 
 
-use SIT\PlatformBundle\Form\produiteditType;
-use SIT\PlatformBundle\Form\produitEtatType;
 use SIT\PlatformBundle\Form\produitType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use SIT\PlatformBundle\Entity\produit;
