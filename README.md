@@ -1,6 +1,15 @@
 # SITPlatform
 Code source de la plateforme CRM est construite par Kais NEFFATI.
 
+##SensioLabsInsight:
+  	
+  	Excellent!
+	Despite a very thorough analysis, SensioLabsInsight couldn't find a single violation in the whole codebase of this project .
+	This is very rare, and is worthy of the Platinum medal.
+	Congratulations to all the developers of this project for such a high quality!
+
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/9e2f0bac-b682-4731-b3a8-645ede1ed0fc/big.png)](https://insight.sensiolabs.com/projects/9e2f0bac-b682-4731-b3a8-645ede1ed0fc)
+
 # Installation
 ## 1. Récupérer le code
 
