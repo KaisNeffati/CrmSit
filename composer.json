@@ -1,6 +1,7 @@
 {
     "name": "kais_neffati/crm-sit",
     "license": "proprietary",
+    "description ": "Gestion commercial",
     "type": "project",
     "autoload": {
         "psr-4": {
