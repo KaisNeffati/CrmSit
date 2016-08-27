@@ -5,10 +5,10 @@ namespace SIT\PlatformBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Produit
+ * produit
  *
  * @ORM\Table(name="produit")
- * @ORM\Entity(repositoryClass="SIT\PlatformBundle\Repository\ProduitRepository")
+ * @ORM\Entity(repositoryClass="SIT\PlatformBundle\Repository\produitRepository")
  */
 class produit
 {
@@ -21,35 +21,20 @@ class produit
      */
     private $id;
 
-
     /**
-     * @ORM\ManyToOne(targetEntity="SIT\PlatformBundle\Entity\societe")
-     * @ORM\JoinColumn(nullable=false)
+     * Bidirectional - Many Comments are authored by one user (OWNING SIDE)
+     *
+     * @ORM\ManyToOne(targetEntity="SIT\PlatformBundle\Entity\societe",inversedBy="societeproduits")
      */
     private $societe;
 
     /**
-     * @return mixed
-     */
-    public function getSociete()
-    {
-        return $this->societe;
-    }
-
-    /**
-     * @param mixed $societe
-     */
-    public function setSociete($societe)
-    {
-        $this->societe = $societe;
-    }
-
-    /**
-     * @var string
+     * Bidirectional - One-To-Many (INVERSE SIDE)
      *
-     * @ORM\Column(name="Status", type="string", length=255)
+     * @ORM\OneToMany(targetEntity="SIT\PlatformBundle\Entity\etatProduit", mappedBy="produit",cascade={"persist", "remove"})
      */
-    private $status;
+    private $etatproduits;
+
 
     /**
      * @var string
@@ -57,6 +42,13 @@ class produit
      * @ORM\Column(name="periodeLivraison", type="string", length=255)
      */
     private $periodeLivraison;
+
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="dateLivraison", type="date")
+     */
+    private $dateLivraison;
 
     /**
      * @var string
@@ -68,17 +60,16 @@ class produit
     /**
      * @var string
      *
-     * @ORM\Column(name="type_d_installation", type="string", length=255)
+     * @ORM\Column(name="typeDInstallation", type="string", length=255)
      */
     private $typeDInstallation;
 
     /**
-     * @var int
+     * @var \DateTime
      *
-     * @ORM\Column(name="budget", type="integer")
+     * @ORM\Column(name="post_date", type="datetime")
      */
-    private $budget;
-
+    private $post_date;
 
     /**
      * Get id
@@ -90,36 +81,31 @@ class produit
         return $this->id;
     }
 
-    /**
-     * Set status
-     *
-     * @param string $status
-     *
-     * @return Produit
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
 
-        return $this;
+
+    /**
+     * @return \DateTime
+     */
+    public function getPostDate()
+    {
+        return $this->post_date;
     }
 
     /**
-     * Get status
-     *
-     * @return string
+     * @param \DateTime $post_date
      */
-    public function getStatus()
+    public function setPostDate($post_date)
     {
-        return $this->status;
+        $this->post_date = $post_date;
     }
+
 
     /**
      * Set periodeLivraison
      *
      * @param string $periodeLivraison
      *
-     * @return Produit
+     * @return produit
      */
     public function setPeriodeLivraison($periodeLivraison)
     {
@@ -143,7 +129,7 @@ class produit
      *
      * @param string $libelle
      *
-     * @return Produit
+     * @return produit
      */
     public function setLibelle($libelle)
     {
@@ -167,7 +153,7 @@ class produit
      *
      * @param string $typeDInstallation
      *
-     * @return Produit
+     * @return produit
      */
     public function setTypeDInstallation($typeDInstallation)
     {
@@ -187,27 +173,53 @@ class produit
     }
 
     /**
-     * Set budget
-     *
-     * @param integer $budget
-     *
-     * @return Produit
+     * @return mixed
      */
-    public function setBudget($budget)
+    public function getSociete()
     {
-        $this->budget = $budget;
-
-        return $this;
+        return $this->societe;
     }
 
     /**
-     * Get budget
-     *
+     * @param mixed $societe
+     */
+    public function setSociete($societe)
+    {
+        $this->societe = $societe;
+    }
+
+    /**
      * @return int
      */
-    public function getBudget()
+    public function getDateLivraison()
     {
-        return $this->budget;
+        return $this->dateLivraison;
     }
+
+    /**
+     * @param int $dateLivraison
+     */
+    public function setDateLivraison($dateLivraison)
+    {
+        $this->dateLivraison = $dateLivraison;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEtatproduits()
+    {
+        return $this->etatproduits;
+    }
+
+    /**
+     * @param mixed $etatproduits
+     */
+    public function setEtatproduits($etatproduits)
+    {
+        $this->etatproduits = $etatproduits;
+    }
+
+
 }
 

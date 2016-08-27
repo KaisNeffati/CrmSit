@@ -49,6 +49,119 @@ class societe
      */
     private $adresse;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="SIT\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $commercialApportant;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="SIT\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $commercialGerant;
+
+    /**
+     * Bidirectional - One-To-Many (INVERSE SIDE)
+     *
+     * @ORM\OneToMany(targetEntity="SIT\PlatformBundle\Entity\produit", mappedBy="societe",cascade={"persist", "remove"})
+     */
+    private $societeproduits;
+
+    /**
+     * Bidirectional - One-To-Many (INVERSE SIDE)
+     *
+     * @ORM\OneToMany(targetEntity="SIT\PlatformBundle\Entity\personnel", mappedBy="societe",cascade={"persist", "remove"})
+     */
+    private $societepersonnel;
+
+    /**
+     * Bidirectional - One-To-Many (INVERSE SIDE)
+     *
+     * @ORM\OneToMany(targetEntity="SIT\PlatformBundle\Entity\note", mappedBy="societe",cascade={"persist", "remove"})
+     */
+    private $societenotes;
+
+    /**
+     * @return mixed
+     */
+    public function getSocietepersonnel()
+    {
+        return $this->societepersonnel;
+    }
+
+    /**
+     * @param mixed $societepersonnel
+     */
+    public function setSocietepersonnel($societepersonnel)
+    {
+        $this->societepersonnel = $societepersonnel;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSocieteproduits()
+    {
+        return $this->societeproduits;
+    }
+
+    /**
+     * @param mixed $societeproduits
+     */
+    public function setSocieteproduits($societeproduits)
+    {
+        $this->societeproduits = $societeproduits;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSocietenotes()
+    {
+        return $this->societenotes;
+    }
+
+    /**
+     * @param mixed $societenotes
+     */
+    public function setSocietenotes($societenotes)
+    {
+        $this->societenotes = $societenotes;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getCommercialApportant()
+    {
+        return $this->commercialApportant;
+    }
+
+    /**
+     * @param mixed $commercialApportant
+     */
+    public function setCommercialApportant($commercialApportant)
+    {
+        $this->commercialApportant = $commercialApportant;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCommercialGerant()
+    {
+        return $this->commercialGerant;
+    }
+
+    /**
+     * @param mixed $commercialGérant
+     */
+    public function setCommercialGerant($commercialGerant)
+    {
+        $this->commercialGerant = $commercialGerant;
+    }
 
     /**
      * Get id

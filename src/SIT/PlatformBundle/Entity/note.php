@@ -22,8 +22,9 @@ class note
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="SIT\PlatformBundle\Entity\societe")
-     * @ORM\JoinColumn(nullable=false)
+     * Bidirectional - Many Comments are authored by one user (OWNING SIDE)
+     *
+     * @ORM\ManyToOne(targetEntity="SIT\PlatformBundle\Entity\societe",inversedBy="societenotes")
      */
     private $societe;
 
@@ -34,6 +35,15 @@ class note
      */
     private $date;
 
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="noteafaire", type="integer")
+     */
+    private $noteafaire;
+
+
     /**
      * @var string
      *
@@ -41,6 +51,12 @@ class note
      */
     private $description;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="post_date", type="datetime")
+     */
+    private $post_date;
 
     /**
      * Get id
@@ -99,5 +115,53 @@ class note
     {
         return $this->description;
     }
+    /**
+     * @return mixed
+     */
+    public function getSociete()
+    {
+        return $this->societe;
+    }
+
+    /**
+     * @param mixed $societe
+     */
+    public function setSociete($societe)
+    {
+        $this->societe = $societe;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNoteafaire()
+    {
+        return $this->noteafaire;
+    }
+
+    /**
+     * @param int $noteafaire
+     */
+    public function setNoteafaire($noteafaire)
+    {
+        $this->noteafaire = $noteafaire;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getPostDate()
+    {
+        return $this->post_date;
+    }
+
+    /**
+     * @param \DateTime $post_date
+     */
+    public function setPostDate($post_date)
+    {
+        $this->post_date = $post_date;
+    }
+
 }
 

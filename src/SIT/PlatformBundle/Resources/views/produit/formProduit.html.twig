@@ -3,13 +3,6 @@
     <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--4-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                {{ form_errors(form.status) }}
-                {{ form_widget(form.status, {'attr': {'class': 'mdl-textfield__input','id':'status'}}) }}
-                <label class="mdl-textfield__label" for="status">{{ form_label(form.status) }}</label>
-            </div>
-        </div>
-        <div class="mdl-cell mdl-cell--4-col">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 {{ form_errors(form.periodeLivraison) }}
                 {{ form_widget(form.periodeLivraison, {'attr': {'class': 'mdl-textfield__input','id':'periodeLivraison'}}) }}
                 <label class="mdl-textfield__label" for="periodeLivraison">{{ form_label(form.periodeLivraison) }}</label>
@@ -20,6 +13,15 @@
                 {{ form_errors(form.libelle) }}
                 {{ form_widget(form.libelle, {'attr': {'class': 'mdl-textfield__input','id':'libelle'}}) }}
                 <label class="mdl-textfield__label" for="libelle">{{ form_label(form.libelle) }}</label>
+            </div>
+        </div>
+        <div class="mdl-cell mdl-cell--4-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                {{ form_errors(form.dateLivraison) }}
+                {{ form_widget(form.dateLivraison.year, {'attr': {'class': 'mdl-textfield__input','id':'dateLivraison'}}) }}
+                {{ form_widget(form.dateLivraison.month, {'attr': {'style': 'display:none','id':''}}) }}
+                {{ form_widget(form.dateLivraison.day, {'attr': {'style': 'display:none','id':''}}) }}
+                <label class="mdl-textfield__label" for="dateLivraison">{{ form_label(form.dateLivraison) }}</label>
             </div>
         </div>
     </div>
@@ -36,14 +38,6 @@
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input class="mdl-textfield__input" type="text" id="sample1" value="{{ name }}" readonly>
                 <label for="sample1" class="mdl-textfield__label">societe</label>
-            </div>
-        </div>
-
-        <div class="mdl-cell mdl-cell--4-col">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                {{ form_errors(form.budget) }}
-                {{ form_widget(form.budget, {'attr': {'class': 'mdl-textfield__input','id':'budget'}}) }}
-                <label class="mdl-textfield__label" for="budget">{{ form_label(form.budget) }}</label>
             </div>
         </div>
 

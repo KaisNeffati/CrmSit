@@ -22,8 +22,9 @@ class personnel
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="SIT\PlatformBundle\Entity\societe")
-     * @ORM\JoinColumn(nullable=false)
+     * Bidirectional - Many Comments are authored by one user (OWNING SIDE)
+     *
+     * @ORM\ManyToOne(targetEntity="SIT\PlatformBundle\Entity\societe",inversedBy="societepersonnel")
      */
     private $societe;
 

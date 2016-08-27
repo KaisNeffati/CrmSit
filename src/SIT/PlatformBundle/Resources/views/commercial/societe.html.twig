@@ -3,7 +3,32 @@
 {% block title %}
     Annonces - {{ parent() }}
 {% endblock %}
-{% block sitplatform_left %}
+
+    {% block sitplatform_top %}
+        <ul class="bxslider">
+            {% for item in listNote %}
+                {% if (item.noteAFaire==1)  %}
+                    <li><div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                            <div class="mdl-card__title">
+                                <h2 class="mdl-card__title-text">Rappelle le {{ item.date|date('Y-m-d') }}</h2>
+
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                Vous avez : <br>
+                                {{ item.description }}
+                            </div>
+                            <div class="mdl-card__menu">
+                                <a class="mdl-list__item-secondary-action" href="{{ path('sit_supprimer_note',{'id':societe.id,'idnote':item.id}) }}">
+                                    <i class="material-icons">delete</i>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endblock %}
+    {% block sitplatform_left %}
     <div class="demo-card-square mdl-card mdl-shadow--2dp">
         <div class="mdl-card__title mdl-card--expand">
             <h2 class="mdl-card__title-text">List des Contacts</h2>
@@ -35,10 +60,18 @@
     </div>
 {% endblock %}
     {% block sitplatform_center %}
-
         <div class="demo-card-square mdl-card mdl-shadow--2dp">
             <div class="mdl-card__title mdl-card--expand">
                 <h2 class="mdl-card__title-text">Societe Num : {{ societe.id }}</h2>
+                <span id="ajouternoteafaire">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{ path('sit_ajouter_note',{'id':societe.id})}}">
+                        Ajouter Note
+                    </a>
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{ path('sit_ajouter_noteAFaire',{'id':societe.id})}}">
+                    Ajouter à faire
+                </a>
+                </span>
+
             </div>
             <div class="mdl-card__supporting-text">
                 <div class="mdl-grid">
@@ -50,50 +83,80 @@
                     <div class="mdl-cell mdl-cell--3-col"><strong>Adresse : </strong> {{ societe.adresse }}</div>
                 </div>
                 <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--6-col">
-                        <div><strong>Apporter par le Commerical : </strong> {{ societe.nom }}</div><br><br>
-                        <div><strong>Demo : </strong> fermer</div>
+                    <div class="mdl-cell mdl-cell--6-col" style="    padding-top: 1%;">
+                        <strong>Apporter par le Commerical : </strong> {{ societe.commercialApportant.username }}
                     </div>
                     <div class="mdl-cell mdl-cell--6-col">
-                        <strong>Gérer par le commercial : </strong> {{ societe.tel }}</div>
+                        <strong>Gérer par le commercial : </strong> {{ societe.commercialGerant.username }}
+                        {% if is_granted('ROLE_BUSINESS_DEVELOPER') %}
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{ path('sit_modifier_commercial',{'id':societe.id}) }}">
+                            Modifier
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <strong>Demo : </strong>
+                        {% if (nbrdemo>0) %}
+                              <label>Expiré</label>
+                        {% else %}
+                            <label>Valable</label>
+                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{ path('sit_demo',{'id':societe.id}) }}">
+                                Ouvrir Compte
+                            </a>
+                        {% endif %}
+                    </div>
                 </div>
 
                 <h6><strong>Liste des Notes:</strong></h6>
-                <ul class="demo-list-three mdl-list">
+                <ul id="myList" class="demo-list-three mdl-list">
                     {% for item in listNote %}
+                        {% if (item.noteAFaire==0)  %}
                     <li class="mdl-list__item mdl-list__item--three-line">
                             <span class="mdl-list__item-primary-content">
                               <i class="material-icons mdl-list__item-avatar">person</i>
-                              <span>Bryan Cranston</span>
-                                <span class="mdl-list__item-sub-title">{{ item.date|date('Y-m-d H:i:s')  }}</span>
+                              <span>{{ app.user.username }}</span>
+                                <span class="mdl-list__item-sub-title">  Date: {{ item.date|date('Y-m-d H:i:s')  }}<br><i>publier le {{ item.postdate|date('Y-m-d H:i:s') }}</i></span>
                               <span class="mdl-list__item-text-body">
                                   {{ item.description }}
                               </span>
-
                             </span>
                         <span class="mdl-list__item-secondary-content">
                             <br>
                             <div style="display: flex">
-                                <a class="mdl-list__item-secondary-action" href="#">
+                                <a class="mdl-list__item-secondary-action" href="{{ path('sit_modifier_note',{'id':societe.id,'idnote':item.id}) }}">
                                     <i class="material-icons">edit</i>
                                 </a>
-                                <a class="mdl-list__item-secondary-action" href="#">
+                                <a class="mdl-list__item-secondary-action" href="{{ path('sit_supprimer_note',{'id':societe.id,'idnote':item.id}) }}">
                                     <i class="material-icons">delete</i>
                                 </a>
                             </div>
                         </span>
+                        <br><br>
                     </li>
+
+                    {% endif %}
                     {% endfor %}
                 </ul>
+
+                <div id="loadMore">Load more</div>
+                <div id="showLess">Show less</div>
             </div>
             <div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    Ajouter Note
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{ path("sit_platform_homepage") }}" >
+                    Retourner
+                </a>
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{ path('sit_modifier_societe',{'id':societe.id}) }}">
+                    Modifier Societe
+                </a>
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{ path('sit_supprimer_societe',{'id':societe.id}) }}">
+                    Supprimer Societe
                 </a>
             </div>
         </div>
     {% endblock %}
-{% block sitplatform_right %}
+    {% block sitplatform_right %}
 <div class="demo-card-square mdl-card mdl-shadow--2dp">
     <div class="mdl-card__title mdl-card--expand">
         <h2 class="mdl-card__title-text">List des Produits</h2>

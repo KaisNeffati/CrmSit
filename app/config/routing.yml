@@ -1,10 +1,12 @@
 sit_platform:
     resource: "@SITPlatformBundle/Resources/config/routing.yml"
-    prefix:   /
 
 sit_core:
     resource: "@SITCoreBundle/Resources/config/routing.yml"
     prefix:   /platform
+
+sit_utilisateur:
+    resource: "@SITUserBundle/Resources/config/routing.yml"
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
@@ -24,5 +26,7 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
+
+
 
 

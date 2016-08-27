@@ -14,13 +14,20 @@
             </div>
         {% endfor %}
     {% endfor %}
-    <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--4-col"></div>
-        <div class="mdl-cell mdl-cell--4-col">
+    {% image 'bundles/sit_platform/img/commercial.jpg'
+     output='/images/commercial.jpg'%}
+    <img src="{{ asset_url }}" alt="Example" style="width: 100%"/>
+    {% endimage %}
+    <div class="mdl-grid" style="position: absolute;top: 20%;width: 100%;">
+        <div class="mdl-cell mdl-cell--4-col" >
             {% block fos_user_content %}
             {% endblock fos_user_content %}
         </div>
-        <div class="mdl-cell mdl-cell--4-col"></div>
+        <div class="mdl-cell mdl-cell--4-col">
+
+        </div>
+        <div class="mdl-cell mdl-cell--4-col">
+        </div>
     </div>
     {# On définit ce block, dans lequel vont venir s'insérer les autres vues du bundle #}
 

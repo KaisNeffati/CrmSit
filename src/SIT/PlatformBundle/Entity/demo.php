@@ -22,7 +22,7 @@ class demo
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="SIT\PlatformBundle\Entity\societe")
+     * @ORM\OneToOne(targetEntity="SIT\PlatformBundle\Entity\societe" ,mappedBy="topic",cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $societe;
@@ -255,5 +255,22 @@ class demo
     {
         return $this->email;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSociete()
+    {
+        return $this->societe;
+    }
+
+    /**
+     * @param mixed $societe
+     */
+    public function setSociete($societe)
+    {
+        $this->societe = $societe;
+    }
+
 }
 

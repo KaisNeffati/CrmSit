@@ -5,10 +5,6 @@
 {% block fos_user_content %}
 
     <div class="demo-card-square mdl-card mdl-shadow--2dp">
-        {% if error %}
-            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
-
         <form action="{{ path("fos_user_security_check") }}" method="post">
 
         <div class="mdl-card__title mdl-card--expand">
@@ -30,6 +26,9 @@
                 <input type="checkbox" id="remember_me" class="mdl-checkbox__input" name="_remember_me" value="on">
                 <span class="mdl-checkbox__label">{{ 'security.login.remember_me'|trans }}</span>
             </label>
+            {% if error %}
+                <div class="erreur"><i>{{ error.messageKey|trans(error.messageData, 'security') }}</i></div>
+            {% endif %}
 
         </div>
         <div class="mdl-card__actions mdl-card--border">
